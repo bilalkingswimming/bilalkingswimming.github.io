@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بلال المصري | مدرب سباحة | Belal Al Masri | Swimming Coach</title>
+  <meta name="description" content="بلال المصري - مدرب سباحة محترف في قطر والأردن | Belal Al Masri - Professional Swimming Coach in Qatar & Jordan">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- AOS Animation -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <style>
+    /* ═══════════════════════════════════════════════
+       VARIABLES & RESET
+    ═══════════════════════════════════════════════ */
+    :root {
+      --blue-deep:    #0a1628;
+      --blue-dark:    #0d2244;
+      --blue-mid:     #1a4b8c;
+      --blue-bright:  #1e90ff;
+      --blue-light:   #56c8ff;
+      --cyan:         #00d4ff;
+      --gold:         #f0a500;
+      --white:        #ffffff;
+      --gray-light:   #f4f7fb;
+      --text-dark:    #1a1a2e;
+      --text-muted:   #7a8a9a;
+      --shadow:       0 20px 60px rgba(10, 22, 40, 0.4);
+      --radius:       16px;
+      --transition:   0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cairo', 'Montserrat', sans-serif;
+      background: var(--blue-deep);
+      color: var(--white);
+      overflow-x: hidden;
+      direction: rtl;
+    }
+
+    body.en { direction: ltr; font-family: 'Montserrat', 'Cairo', sans-serif; }
+
+    /* ═══════════════════════════════════════════════
+       WATER BUBBLES BACKGROUND
+    ═══════════════════════════════════════════════ */
+    .bubbles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .bubble {
+      position: absolute;
+      bottom: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(86,200,255,0.25), rgba(30,144,255,0.08));
+      border: 1px solid rgba(86,200,255,0.2);
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) scale(1); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(-110vh) scale(1.4); opacity: 0; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 5%;
+      background: rgba(10, 22, 40, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(30,144,255,0.2);
+      transition: var(--transition);
+    }
+    nav.scrolled {
+      padding: 12px 5%;
+      background: rgba(10, 22, 40, 0.97);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 20px rgba(30,144,255,0.5);
+    }
+    .logo-text { line-height: 1.2; }
+    .logo-text .name { font-size: 16px; font-weight: 900; color: var(--white); }
+    .logo-text .title { font-size: 11px; color: var(--cyan); letter-spacing: 1px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 25px;
+      transition: var(--transition);
+    }
+    .nav-links a:hover {
+      color: var(--cyan);
+      background: rgba(30,144,255,0.15);
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(30,144,255,0.15);
+      border: 1px solid rgba(30,144,255,0.3);
+      border-radius: 25px;
+      padding: 6px 8px;
+      cursor: pointer;
+    }
+    .lang-btn {
+      border: none;
+      background: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 20px;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+    .lang-btn.active {
+      background: var(--blue-bright);
+      color: var(--white);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .hamburger span {
+      display: block;
+      width: 25px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 76px; left: 0; right: 0;
+      background: rgba(10, 22, 40, 0.98);
+      padding: 20px;
+      z-index: 999;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(30,144,255,0.2);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .mobile-menu a {
+      display: block;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-radius: 10px;
+      transition: var(--transition);
+    }
+    .mobile-menu a:hover { background: rgba(30,144,255,0.2); color: var(--cyan); }
+
+    /* ═══════════════════════════════════════════════
+       HERO SECTION
+    ═══════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(30,144,255,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 20% 50%, rgba(0,212,255,0.12) 0%, transparent 60%),
+        linear-gradient(180deg, #0a1628 0%, #0d2244 50%, #0a1832 100%);
+    }
+
+    /* Animated water waves */
+    .waves {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .waves svg { display: block; }
+    .wave-path-1 { animation: waveMove 6s ease-in-out infinite alternate; }
+    .wave-path-2 { animation: waveMove 8s ease-in-out infinite alternate-reverse; }
+    .wave-path-3 { animation: waveMove 10s ease-in-out infinite alternate; }
+    @keyframes waveMove {
+      0%   { d: path("M0,120 C200,60 400,180 600,100 C800,20 1000,140 1200,80 C1400,20 1600,100 1800,60 L1800,200 L0,200 Z"); }
+      100% { d: path("M0,80 C200,140 400,40 600,120 C800,200 1000,60 1200,140 C1400,200 1600,80 1800,120 L1800,200 L0,200 Z"); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      padding: 120px 20px 180px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(30,144,255,0.15);
+      border: 1px solid rgba(30,144,255,0.4);
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 24px;
+      animation: fadeInDown 0.8s ease both;
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      animation: fadeInUp 0.9s 0.1s ease both;
+    }
+    .hero-name .gradient-text {
+      background: linear-gradient(135deg, var(--blue-light), var(--cyan), var(--white));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 40px;
+      font-weight: 400;
+      animation: fadeInUp 0.9s 0.2s ease both;
+    }
+
+    .hero-flags {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      animation: fadeInUp 0.9s 0.3s ease both;
+    }
+    .flag-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 30px;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .flag-item .flag { font-size: 22px; }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.9s 0.4s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+      color: var(--white);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 8px 30px rgba(30,144,255,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--cyan), var(--blue-bright));
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(30,144,255,0.5); }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary i { position: relative; z-index: 1; }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid rgba(30,144,255,0.5);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 50px;
+      transition: var(--transition);
+      background: rgba(30,144,255,0.08);
+    }
+    .btn-outline:hover {
+      background: rgba(30,144,255,0.2);
+      border-color: var(--blue-bright);
+      transform: translateY(-3px);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+      animation: bounce 2s ease infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       PHOTO SECTION
+    ═══════════════════════════════════════════════ */
+    #gallery {
+      position: relative;
+      z-index: 2;
+      padding: 100px 5%;
+      background: linear-gradient(180deg, #0d2244 0%, #0a1628 100%);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section-label {
+      display: inline-block;
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .divider-line { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--blue-bright)); }
+    .divider-line.r { background: linear-gradient(90deg, var(--blue-bright), transparent); }
+    .divider-dot { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      background: rgba(30,144,255,0.08);
+      border: 1px solid rgba(30,144,255,0.2);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,22,40,0.8) 0%, transparent 60%);
+      opacity: 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-item.featured { grid-column: span 2; }
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: rgba(86,200,255,0.4);
+      font-size: 14px;
+    }
+    .gallery-placeholder i { font-size: 40px; }
+
+    /* ═══════════════════════════════════════════════
+       ABOUT SECTION
+    ═══════════════════════════════════════════════ */
+    #about {
+      position: relative;
+      z-index: 2;
+      padding: 100px 5%;
+      background: var(--blue-deep);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-img-frame {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      max-width: 420px;
+      background: rgba(30,144,255,0.1);
+      border: 1px solid rgba(30,144,255,0.3);
+    }
+    .about-img-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .about-img-frame::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--blue-bright), var(--cyan), transparent, transparent);
+      z-index: -1;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: -20px;
+      left: 20px;
+      background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+      border-radius: 14px;
+      padding: 16px 24px;
+      box-shadow: 0 10px 40px rgba(30,144,255,0.4);
+      text-align: center;
+    }
+    .about-badge .number { font-size: 2rem; font-weight: 900; line-height: 1; }
+    .about-badge .label { font-size: 11px; opacity: 0.9; margin-top: 4px; }
+
+    .about-content { }
+    .about-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.9;
+      margin-bottom: 36px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .stat-card {
+      background: rgba(30,144,255,0.08);
+      border: 1px solid rgba(30,144,255,0.2);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .stat-card:hover {
+      background: rgba(30,144,255,0.15);
+      border-color: var(--blue-bright);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(30,144,255,0.2);
+    }
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--blue-light), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 6px; font-weight: 600; }
+
+    /* ═══════════════════════════════════════════════
+       SERVICES / TRAINING SECTION
+    ═══════════════════════════════════════════════ */
+    #services {
+      position: relative;
+      z-index: 2;
+      padding: 100px 5%;
+      background: linear-gradient(180deg, #0d2244 0%, #0a1628 100%);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(30,144,255,0.2);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-bright), var(--cyan));
+      transform: scaleX(0);
+      transition: var(--transition);
+      transform-origin: right;
+    }
+    .service-card:hover {
+      background: rgba(30,144,255,0.08);
+      border-color: rgba(30,144,255,0.5);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(30,144,255,0.2);
+    }
+    .service-card:hover::before { transform: scaleX(1); transform-origin: left; }
+
+    .service-icon {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(30,144,255,0.2), rgba(0,212,255,0.1));
+      border: 2px solid rgba(30,144,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 20px;
+      transition: var(--transition);
+    }
+    .service-card:hover .service-icon {
+      background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+      border-color: transparent;
+      box-shadow: 0 10px 30px rgba(30,144,255,0.4);
+    }
+    .service-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .service-card p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.8; }
+
+    /* ═══════════════════════════════════════════════
+       CONTACT SECTION
+    ═══════════════════════════════════════════════ */
+    #contact {
+      position: relative;
+      z-index: 2;
+      padding: 100px 5%;
+      background: var(--blue-deep);
+    }
+
+    .contact-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .contact-info h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--white), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .contact-info p {
+      color: rgba(255,255,255,0.65);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .contact-items { display: flex; flex-direction: column; gap: 16px; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(30,144,255,0.08);
+      border: 1px solid rgba(30,144,255,0.2);
+      border-radius: 14px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: var(--white);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .contact-item:hover {
+      background: rgba(30,144,255,0.18);
+      border-color: var(--blue-bright);
+      transform: translateX(-6px);
+      box-shadow: 0 8px 25px rgba(30,144,255,0.2);
+    }
+    body.en .contact-item:hover { transform: translateX(6px); }
+
+    .ci-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .ci-icon.phone  { background: linear-gradient(135deg, #25d366, #128c7e); }
+    .ci-icon.insta  { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .ci-icon.flag-qa { background: linear-gradient(135deg, #8d1b3d, #fff); color: #fff; font-size: 22px; }
+    .ci-icon.flag-jo { background: linear-gradient(135deg, #007a3d, #ce1126); color: #fff; font-size: 22px; }
+
+    .ci-text .ci-label { font-size: 11px; color: var(--cyan); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .ci-text .ci-value { font-size: 15px; font-weight: 600; margin-top: 2px; }
+
+    /* Social Links big */
+    .social-big {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .social-big h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .insta-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: linear-gradient(135deg, rgba(240,148,51,0.15), rgba(188,24,136,0.15));
+      border: 1px solid rgba(188,24,136,0.3);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-decoration: none;
+      color: var(--white);
+      transition: var(--transition);
+      text-align: center;
+    }
+    .insta-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(188,24,136,0.3);
+      background: linear-gradient(135deg, rgba(240,148,51,0.25), rgba(188,24,136,0.25));
+    }
+    .insta-icon-big {
+      width: 72px; height: 72px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 10px 30px rgba(188,24,136,0.4);
+    }
+    .insta-handle { font-size: 20px; font-weight: 900; }
+    .insta-sub { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    footer {
+      position: relative;
+      z-index: 2;
+      background: rgba(5, 12, 25, 0.95);
+      border-top: 1px solid rgba(30,144,255,0.2);
+      padding: 40px 5%;
+      text-align: center;
+    }
+    .footer-logo { font-size: 1.3rem; font-weight: 900; margin-bottom: 12px; }
+    .footer-logo span { color: var(--cyan); }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+    /* ═══════════════════════════════════════════════
+       LIGHTBOX
+    ═══════════════════════════════════════════════ */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .lb-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: 50%;
+      color: var(--white);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .lb-close:hover { background: rgba(255,255,255,0.2); }
+
+    /* ═══════════════════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════════════════ */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(30,144,255,0.5); }
+      50%       { box-shadow: 0 0 40px rgba(30,144,255,0.9), 0 0 60px rgba(0,212,255,0.4); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.featured { grid-column: span 1; }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .about-image-wrap { text-align: center; }
+      .about-img-frame { margin: 0 auto; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-wrapper { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .hero-flags { flex-direction: column; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       SCROLLBAR
+    ═══════════════════════════════════════════════ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--blue-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-mid); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue-bright); }
+
+    /* ═══════════════════════════════════════════════
+       LANGUAGE-AWARE OVERRIDES
+    ═══════════════════════════════════════════════ */
+    [data-ar] { display: block; }
+    [data-en] { display: none; }
+    body.en [data-ar] { display: none; }
+    body.en [data-en] { display: block; }
+
+    /* Inline spans */
+    span[data-ar], span[data-en] { display: inline; }
+    body.en span[data-ar] { display: none; }
+    body.en span[data-en] { display: inline; }
+
+    /* ═══════════════════════════════════════════════
+       WAVE SECTION SHAPE
+    ═══════════════════════════════════════════════ */
+    .section-wave {
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .section-wave svg { display: block; }
+
+    /* Floating swimmer icon */
+    .swimmer-float {
+      position: absolute;
+      top: 50%; right: 8%;
+      transform: translateY(-50%);
+      font-size: 160px;
+      opacity: 0.04;
+      animation: floatIcon 5s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes floatIcon {
+      from { transform: translateY(-50%) translateX(0); }
+      to   { transform: translateY(-53%) translateX(-15px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════ WATER BUBBLES ══════ -->
+  <div class="bubbles" id="bubbles"></div>
+
+  <!-- ══════ LIGHTBOX ══════ -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+    <img id="lb-img" src="" alt="" />
+  </div>
+
+  <!-- ══════ NAVBAR ══════ -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <div class="logo-icon">🏊</div>
+      <div class="logo-text">
+        <div class="name">
+          <span data-ar>بلال المصري</span>
+          <span data-en>Belal Al Masri</span>
+        </div>
+        <div class="title">
+          <span data-ar>مدرب سباحة محترف</span>
+          <span data-en>Professional Swimming Coach</span>
+        </div>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#about" data-ar>من أنا</a><a href="#about" data-en>About</a></li>
+      <li><a href="#services" data-ar>التدريب</a><a href="#services" data-en>Training</a></li>
+      <li><a href="#gallery" data-ar>الصور</a><a href="#gallery" data-en>Gallery</a></li>
+      <li><a href="#contact" data-ar>تواصل معي</a><a href="#contact" data-en>Contact</a></li>
+    </ul>
+
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('ar')" id="btn-ar">ع</button>
+        <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      </div>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#about" onclick="closeMenu()"><span data-ar>من أنا</span><span data-en>About</span></a></li>
+      <li><a href="#services" onclick="closeMenu()"><span data-ar>التدريب</span><span data-en>Training</span></a></li>
+      <li><a href="#gallery" onclick="closeMenu()"><span data-ar>الصور</span><span data-en>Gallery</span></a></li>
+      <li><a href="#contact" onclick="closeMenu()"><span data-ar>تواصل معي</span><span data-en>Contact</span></a></li>
+    </ul>
+  </div>
+
+  <!-- ══════ HERO ══════ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <i class="fas fa-person-swimming swimmer-float"></i>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-medal"></i>
+        <span data-ar>مدرب سباحة معتمد</span>
+        <span data-en>Certified Swimming Coach</span>
+      </div>
+
+      <h1 class="hero-name">
+        <div class="gradient-text" data-ar>بلال المصري</div>
+        <div class="gradient-text" data-en>Belal Al Masri</div>
+      </h1>
+
+      <p class="hero-subtitle">
+        <span data-ar>احترف السباحة على يد خبير — أساليب تدريب متطورة لجميع المستويات</span>
+        <span data-en>Master swimming with an expert — advanced training methods for all levels</span>
+      </p>
+
+      <div class="hero-flags">
+        <div class="flag-item">
+          <span class="flag">🇶🇦</span>
+          <span data-ar>قطر</span>
+          <span data-en>Qatar</span>
+        </div>
+        <div style="color:rgba(255,255,255,0.3);font-size:20px;">•</div>
+        <div class="flag-item">
+          <span class="flag">🇯🇴</span>
+          <span data-ar>الأردن</span>
+          <span data-en>Jordan</span>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">
+          <i class="fab fa-whatsapp"></i>
+          <span data-ar><span>تواصل الآن</span></span>
+          <span data-en><span>Get in Touch</span></span>
+        </a>
+        <a href="https://www.instagram.com/kingswimm" target="_blank" class="btn-outline">
+          <i class="fab fa-instagram"></i>
+          <span>@kingswimm</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span data-ar>اسحب للأسفل</span>
+      <span data-en>Scroll down</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+
+    <!-- Animated waves -->
+    <div class="waves">
+      <svg viewBox="0 0 1800 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="120" width="100%">
+        <path class="wave-path-3" fill="rgba(13,34,68,0.4)"
+          d="M0,100 C200,40 400,160 600,80 C800,0 1000,120 1200,60 C1400,0 1600,80 1800,40 L1800,200 L0,200 Z"/>
+        <path class="wave-path-2" fill="rgba(13,34,68,0.6)"
+          d="M0,120 C200,60 400,180 600,100 C800,20 1000,140 1200,80 C1400,20 1600,100 1800,60 L1800,200 L0,200 Z"/>
+        <path class="wave-path-1" fill="#0d2244"
+          d="M0,140 C200,100 400,170 600,130 C800,90 1000,160 1200,120 C1400,80 1600,130 1800,100 L1800,200 L0,200 Z"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══════ GALLERY ══════ -->
+  <section id="gallery">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-label">
+        <span data-ar>معرض الصور</span>
+        <span data-en>Gallery</span>
+      </div>
+      <h2 class="section-title">
+        <span data-ar>لحظات من المسيرة</span>
+        <span data-en>Moments from the Journey</span>
+      </h2>
+      <div class="section-divider">
+        <div class="divider-line"></div>
+        <div class="divider-dot"></div>
+        <div class="divider-line r"></div>
+      </div>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Built dynamically by JS -->
+    </div>
+  </section>
+
+  <!-- ══════ ABOUT ══════ -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-image-wrap" data-aos="fade-right">
+        <div class="about-img-frame">
+          <!-- Replace with real photo: <img src="images/coach.jpg" alt="Belal Al Masri"> -->
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:rgba(86,200,255,0.3);">
+            <i class="fas fa-person-swimming" style="font-size:80px;"></i>
+            <span style="font-size:14px;" data-ar>صورة المدرب</span>
+            <span style="font-size:14px;" data-en>Coach Photo</span>
+          </div>
+        </div>
+        <div class="about-badge">
+          <div class="number">10+</div>
+          <div class="label" data-ar>سنوات خبرة</div>
+          <div class="label" data-en>Years Exp.</div>
+        </div>
+      </div>
+
+      <div class="about-content" data-aos="fade-left">
+        <div class="section-label">
+          <span data-ar>من أنا</span>
+          <span data-en>About Me</span>
+        </div>
+        <h2 class="section-title" style="text-align:right; margin-bottom:20px;">
+          <span data-ar>بلال المصري<br><small style="font-size:0.55em;color:var(--cyan);">مدرب سباحة محترف</small></span>
+          <span data-en style="text-align:left;display:block;">Belal Al Masri<br><small style="font-size:0.55em;color:var(--cyan);">Professional Swimming Coach</small></span>
+        </h2>
+        <p class="about-desc" data-ar>
+          مدرب سباحة محترف ذو خبرة واسعة في تدريب جميع الفئات العمرية، من المبتدئين إلى المحترفين.
+          أعمل في كل من <strong>قطر</strong> و<strong>الأردن</strong>، وأؤمن بأن السباحة ليست مجرد رياضة، بل هي مهارة حياتية أساسية.
+          أعتمد على أساليب تدريبية حديثة ومثبتة علمياً لتطوير مهارات الطلاب وبناء ثقتهم بأنفسهم داخل الماء.
+        </p>
+        <p class="about-desc" data-en>
+          A professional swimming coach with extensive experience training all age groups, from beginners to advanced athletes.
+          Operating in both <strong>Qatar</strong> and <strong>Jordan</strong>, I believe swimming is not just a sport — it's an essential life skill.
+          I use modern, scientifically proven training methods to develop student skills and build their confidence in the water.
+        </p>
+
+        <div class="stats-grid">
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="0">
+            <div class="stat-num">500+</div>
+            <div class="stat-label" data-ar>طالب متخرج</div>
+            <div class="stat-label" data-en>Students Trained</div>
+          </div>
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="stat-num">10+</div>
+            <div class="stat-label" data-ar>سنوات خبرة</div>
+            <div class="stat-label" data-en>Years Experience</div>
+          </div>
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="stat-num">🇶🇦🇯🇴</div>
+            <div class="stat-label" data-ar>قطر والأردن</div>
+            <div class="stat-label" data-en>Qatar & Jordan</div>
+          </div>
+          <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+            <div class="stat-num">⭐⭐⭐⭐⭐</div>
+            <div class="stat-label" data-ar>تقييم ممتاز</div>
+            <div class="stat-label" data-en>Top Rated</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ SERVICES ══════ -->
+  <section id="services">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-label">
+        <span data-ar>برامج التدريب</span>
+        <span data-en>Training Programs</span>
+      </div>
+      <h2 class="section-title">
+        <span data-ar>ماذا أقدم لك؟</span>
+        <span data-en>What I Offer</span>
+      </h2>
+      <div class="section-divider">
+        <div class="divider-line"></div>
+        <div class="divider-dot"></div>
+        <div class="divider-line r"></div>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="service-icon">🏊‍♂️</div>
+        <h3 data-ar>المبتدئون</h3>
+        <h3 data-en>Beginners</h3>
+        <p data-ar>تعلّم أساسيات السباحة في بيئة آمنة وممتعة، مناسب لجميع الأعمار الذين لم يسبحوا من قبل.</p>
+        <p data-en>Learn the fundamentals of swimming in a safe and fun environment, suitable for all ages with no prior experience.</p>
+      </div>
+
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-icon">🎯</div>
+        <h3 data-ar>المتوسطون</h3>
+        <h3 data-en>Intermediate</h3>
+        <p data-ar>تطوير التقنيات وتحسين الأداء، مع التركيز على تنسيق الحركات والتنفس الصحيح لكل أسلوب.</p>
+        <p data-en>Refine your technique and improve performance, focusing on movement coordination and proper breathing for each stroke.</p>
+      </div>
+
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-icon">🏆</div>
+        <h3 data-ar>المحترفون</h3>
+        <h3 data-en>Advanced</h3>
+        <p data-ar>تدريب احترافي لرفع مستوى الأداء التنافسي وتحقيق نتائج متميزة على مستوى البطولات.</p>
+        <p data-en>Professional training to elevate competitive performance and achieve outstanding results at championship level.</p>
+      </div>
+
+      <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="service-icon">👶</div>
+        <h3 data-ar>الأطفال</h3>
+        <h3 data-en>Kids Swimming</h3>
+        <p data-ar>برامج مخصصة للأطفال تُعلّمهم السباحة بطريقة ممتعة وآمنة تبني ثقتهم من الصغر.</p>
+        <p data-en>Dedicated programs for children teaching swimming in a fun, safe way that builds confidence from an early age.</p>
+      </div>
+
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-icon">👨‍👩‍👧</div>
+        <h3 data-ar>تدريب خاص</h3>
+        <h3 data-en>Private Coaching</h3>
+        <p data-ar>جلسات خاصة مصممة حسب احتياجاتك الفردية مع متابعة شخصية مكثفة وتقدم سريع.</p>
+        <p data-en>One-on-one sessions tailored to your individual needs with intensive personal follow-up and rapid progress.</p>
+      </div>
+
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-icon">🔥</div>
+        <h3 data-ar>لياقة مائية</h3>
+        <h3 data-en>Aqua Fitness</h3>
+        <p data-ar>تمارين لياقة بدنية داخل الماء لتعزيز القوة والتحمل وحرق الدهون بطريقة ممتعة.</p>
+        <p data-en>Water-based fitness exercises to build strength, endurance, and burn fat in an enjoyable way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ CONTACT ══════ -->
+  <section id="contact">
+    <div class="section-header" data-aos="fade-up">
+      <div class="section-label">
+        <span data-ar>تواصل معي</span>
+        <span data-en>Contact Me</span>
+      </div>
+      <h2 class="section-title">
+        <span data-ar>ابدأ رحلتك اليوم 🏊</span>
+        <span data-en>Start Your Journey Today 🏊</span>
+      </h2>
+      <div class="section-divider">
+        <div class="divider-line"></div>
+        <div class="divider-dot"></div>
+        <div class="divider-line r"></div>
+      </div>
+    </div>
+
+    <div class="contact-wrapper">
+      <!-- Left: Contact Info -->
+      <div class="contact-info" data-aos="fade-right">
+        <h3 data-ar>تواصل بكل سهولة</h3>
+        <h3 data-en>Reach Me Easily</h3>
+        <p data-ar>سواء كنت في قطر أو الأردن، أنا هنا لمساعدتك في تحقيق أهدافك في السباحة. لا تتردد في التواصل!</p>
+        <p data-en>Whether you're in Qatar or Jordan, I'm here to help you achieve your swimming goals. Don't hesitate to reach out!</p>
+
+        <div class="contact-items">
+          <!-- Qatar Phone -->
+          <a href="https://wa.me/97433125025" target="_blank" class="contact-item" data-aos="fade-up" data-aos-delay="0">
+            <div class="ci-icon phone"><i class="fab fa-whatsapp"></i></div>
+            <div class="ci-text">
+              <div class="ci-label">🇶🇦 <span data-ar>قطر</span><span data-en>Qatar</span></div>
+              <div class="ci-value">+974 3312 5025</div>
+            </div>
+          </a>
+
+          <!-- Jordan Phone -->
+          <a href="https://wa.me/962780041767" target="_blank" class="contact-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="ci-icon phone"><i class="fab fa-whatsapp"></i></div>
+            <div class="ci-text">
+              <div class="ci-label">🇯🇴 <span data-ar>الأردن</span><span data-en>Jordan</span></div>
+              <div class="ci-value">+962 7800 41767</div>
+            </div>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/kingswimm" target="_blank" class="contact-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="ci-icon insta"><i class="fab fa-instagram"></i></div>
+            <div class="ci-text">
+              <div class="ci-label">Instagram</div>
+              <div class="ci-value">@kingswimm</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Instagram Card -->
+      <div class="social-big" data-aos="fade-left">
+        <h3 data-ar>تابعني على إنستاجرام 📸</h3>
+        <h3 data-en>Follow me on Instagram 📸</h3>
+        <a href="https://www.instagram.com/kingswimm" target="_blank" class="insta-card">
+          <div class="insta-icon-big">
+            <i class="fab fa-instagram"></i>
+          </div>
+          <div class="insta-handle">@kingswimm</div>
+          <div class="insta-sub" data-ar>تابع آخر الأخبار والتدريبات والمحتوى الحصري</div>
+          <div class="insta-sub" data-en>Follow for the latest updates, training tips & exclusive content</div>
+          <div style="margin-top:8px; background:linear-gradient(135deg,#f09433,#bc1888); padding:10px 28px; border-radius:30px; font-weight:700; font-size:14px;">
+            <span data-ar>تابع الآن</span>
+            <span data-en>Follow Now</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ FOOTER ══════ -->
+  <footer>
+    <div class="footer-logo">
+      🏊 <span data-ar>بلال <span style="color:var(--cyan)">المصري</span></span>
+      <span data-en>Belal <span style="color:var(--cyan)">Al Masri</span></span>
+    </div>
+    <p class="footer-copy" data-ar>© 2025 بلال المصري — مدرب سباحة محترف | قطر 🇶🇦 والأردن 🇯🇴</p>
+    <p class="footer-copy" data-en>© 2025 Belal Al Masri — Professional Swimming Coach | Qatar 🇶🇦 & Jordan 🇯🇴</p>
+    <p style="margin-top:14px; font-size:12px; color:rgba(255,255,255,0.3);">
+      تم إنشاء الموقع بواسطة المبرمج
+      <a href="https://www.linkedin.com/in/bilal-al-mohammad-50ab8ba3/" target="_blank"
+         style="color:var(--cyan); text-decoration:none; font-weight:700; transition:opacity 0.3s;"
+         onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+        بلال المحمد
+      </a>
+    </p>
+  </footer>
+
+  <!-- ══════ SCRIPTS ══════ -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // ─── AOS Init ───────────────────────────────────
+    AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+    // ─── Bubble Generator ───────────────────────────
+    (function generateBubbles() {
+      const container = document.getElementById('bubbles');
+      for (let i = 0; i < 22; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = Math.random() * 60 + 20;
+        b.style.cssText = `
+          width: ${size}px;
+          height: ${size}px;
+          left: ${Math.random() * 100}%;
+          animation-duration: ${Math.random() * 12 + 8}s;
+          animation-delay: ${Math.random() * 10}s;
+        `;
+        container.appendChild(b);
+      }
+    })();
+
+    // ─── Navbar scroll ──────────────────────────────
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
+    });
+
+    // ─── Language Toggle ────────────────────────────
+    function setLang(lang) {
+      document.body.classList.toggle('en', lang === 'en');
+      document.documentElement.setAttribute('lang', lang === 'ar' ? 'ar' : 'en');
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      localStorage.setItem('lang', lang);
+    }
+
+    // Restore saved language
+    const saved = localStorage.getItem('lang');
+    if (saved) setLang(saved);
+
+    // ─── Mobile Menu ────────────────────────────────
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    // ─── Lightbox ───────────────────────────────────
+    function openLightbox(src) {
+      document.getElementById('lb-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    // ─── All images organised by album ──────────────
+    const albums = [
+      {
+        labelAr: 'الصور العامة',
+        labelEn: 'General',
+        images: [
+          'images/IMG-20241227-WA0040.jpg','images/IMG-20241227-WA0041.jpg','images/IMG-20241227-WA0042.jpg',
+          'images/IMG-20241227-WA0043.jpg','images/IMG-20241227-WA0044.jpg','images/IMG-20241227-WA0045.jpg',
+          'images/IMG-20241227-WA0046.jpg','images/IMG-20241227-WA0047.jpg','images/IMG-20241227-WA0048.jpg',
+          'images/IMG-20241227-WA0049.jpg','images/IMG-20241227-WA0050.jpg','images/IMG-20241227-WA0051.jpg',
+          'images/IMG-20241227-WA0052.jpg','images/IMG-20241227-WA0053.jpg','images/IMG-20241227-WA0054.jpg',
+          'images/IMG-20241227-WA0055.jpg','images/IMG-20241227-WA0056.jpg','images/IMG-20241227-WA0057.jpg',
+          'images/IMG-20241227-WA0058.jpg','images/IMG-20241227-WA0059.jpg','images/IMG-20241227-WA0060.jpg',
+          'images/IMG-20241227-WA0061.jpg','images/IMG-20241227-WA0062.jpg','images/IMG-20241227-WA0063.jpg',
+          'images/IMG-20241227-WA0064.jpg','images/IMG-20241227-WA0065.jpg','images/IMG-20241227-WA0066.jpg',
+          'images/IMG-20241227-WA0067.jpg','images/IMG-20241227-WA0068.jpg','images/IMG-20241227-WA0069.jpg',
+          'images/IMG-20241227-WA0070.jpg','images/IMG-20241227-WA0071.jpg','images/IMG-20241227-WA0072.jpg',
+          'images/IMG-20241227-WA0073.jpg','images/IMG-20241227-WA0074.jpg','images/IMG-20241227-WA0075.jpg',
+          'images/IMG-20241227-WA0076.jpg','images/IMG-20241227-WA0077.jpg','images/IMG-20241227-WA0078.jpg',
+          'images/IMG-20241227-WA0079.jpg','images/IMG-20241227-WA0080.jpg','images/IMG-20241227-WA0081.jpg',
+          'images/IMG-20241227-WA0082.jpg','images/IMG-20241227-WA0083.jpg','images/IMG-20241227-WA0084.jpg',
+          'images/IMG-20241227-WA0085.jpg','images/IMG-20241227-WA0086.jpg','images/IMG-20241227-WA0087.jpg',
+          'images/IMG-20241227-WA0088.jpg','images/IMG-20241227-WA0089.jpg','images/IMG-20241227-WA0090.jpg',
+          'images/IMG-20241227-WA0091.jpg','images/IMG-20241227-WA0092.jpg','images/IMG-20241227-WA0093.jpg',
+          'images/IMG-20241227-WA0094.jpg','images/IMG-20241227-WA0095.jpg','images/IMG-20241227-WA0096.jpg',
+          'images/IMG-20241227-WA0097.jpg','images/IMG-20241227-WA0098.jpg','images/IMG-20241227-WA0099.jpg',
+          'images/IMG-20241227-WA0100.jpg','images/IMG-20241227-WA0101.jpg','images/IMG-20241227-WA0102.jpg',
+          'images/IMG-20241227-WA0103.jpg','images/IMG-20241227-WA0104.jpg','images/IMG-20241227-WA0105.jpg',
+          'images/IMG-20241227-WA0106.jpg','images/IMG-20241227-WA0107.jpg','images/IMG-20241227-WA0108.jpg',
+          'images/IMG-20241227-WA0109.jpg','images/IMG-20241227-WA0110.jpg','images/IMG-20241227-WA0111.jpg',
+          'images/IMG-20241227-WA0112.jpg','images/IMG-20241227-WA0113.jpg','images/IMG-20241227-WA0114.jpg',
+          'images/IMG-20241227-WA0115.jpg','images/IMG-20241227-WA0116.jpg','images/IMG-20241227-WA0117.jpg',
+          'images/IMG-20241227-WA0118.jpg','images/IMG-20241227-WA0119.jpg','images/IMG-20241227-WA0120.jpg',
+          'images/IMG-20241227-WA0121.jpg','images/IMG-20241227-WA0122.jpg','images/IMG-20241227-WA0123.jpg',
+          'images/IMG-20241227-WA0124.jpg','images/IMG-20241227-WA0125.jpg','images/IMG-20241227-WA0126.jpg',
+          'images/IMG-20241227-WA0127.jpg','images/IMG-20241227-WA0128.jpg','images/IMG-20241227-WA0129.jpg',
+          'images/IMG-20241227-WA0130.jpg','images/IMG-20241227-WA0131.jpg','images/IMG-20241227-WA0132.jpg',
+          'images/IMG-20241227-WA0133.jpg','images/IMG-20241227-WA0134.jpg','images/IMG-20241227-WA0135.jpg',
+          'images/IMG-20241227-WA0136.jpg','images/IMG-20241227-WA0137.jpg','images/IMG-20241227-WA0138.jpg',
+          'images/IMG-20241227-WA0139.jpg','images/IMG-20241227-WA0140.jpg','images/IMG-20241227-WA0141.jpg',
+          'images/IMG-20241227-WA0142.jpg','images/IMG-20241227-WA0143.jpg','images/IMG-20241227-WA0144.jpg',
+          'images/IMG-20241227-WA0145.jpg','images/IMG-20241227-WA0146.jpg','images/IMG-20241227-WA0147.jpg',
+          'images/IMG-20241227-WA0148.jpg','images/IMG-20241227-WA0149.jpg','images/IMG-20241227-WA0150.jpg',
+          'images/IMG-20241227-WA0151.jpg','images/IMG-20241227-WA0152.jpg','images/IMG-20241227-WA0153.jpg',
+          'images/IMG-20241227-WA0154.jpg','images/IMG-20241227-WA0155.jpg','images/IMG-20241227-WA0156.jpg',
+          'images/IMG-20241227-WA0157.jpg','images/IMG-20241227-WA0158.jpg','images/IMG-20241227-WA0159.jpg',
+          'images/IMG-20241227-WA0160.jpg','images/IMG-20241227-WA0161.jpg','images/IMG-20241227-WA0162.jpg',
+          'images/IMG-20241227-WA0163.jpg','images/IMG-20241227-WA0164.jpg','images/IMG-20241227-WA0165.jpg',
+          'images/IMG-20241227-WA0166.jpg','images/IMG-20241227-WA0167.jpg','images/IMG-20241227-WA0168.jpg',
+          'images/IMG-20241227-WA0169.jpg','images/IMG-20241227-WA0170.jpg','images/IMG-20241227-WA0171.jpg',
+          'images/IMG-20241227-WA0172.jpg','images/IMG-20241227-WA0173.jpg','images/IMG-20241227-WA0174.jpg',
+          'images/IMG-20241227-WA0175.jpg','images/IMG-20241227-WA0176.jpg','images/IMG-20241227-WA0177.jpg',
+          'images/IMG-20241227-WA0178.jpg','images/IMG-20241227-WA0179.jpg','images/IMG-20241227-WA0180.jpg',
+          'images/IMG-20241227-WA0181.jpg','images/IMG-20241227-WA0182.jpg','images/IMG-20241227-WA0183.jpg',
+          'images/IMG-20241227-WA0184.jpg','images/IMG-20241227-WA0185.jpg','images/IMG-20241227-WA0186.jpg',
+          'images/IMG-20241227-WA0187.jpg','images/IMG-20241227-WA0188.jpg','images/IMG-20241227-WA0189.jpg',
+          'images/IMG-20241227-WA0190.jpg','images/IMG-20241227-WA0191.jpg','images/IMG-20241227-WA0192.jpg',
+          'images/IMG-20241227-WA0193.jpg','images/IMG-20241227-WA0194.jpg','images/IMG-20241227-WA0195.jpg',
+          'images/IMG-20241227-WA0196.jpg','images/IMG-20241227-WA0197.jpg','images/IMG-20241227-WA0198.jpg',
+          'images/IMG-20241227-WA0199.jpg','images/IMG-20241227-WA0200.jpg','images/IMG-20241227-WA0201.jpg',
+          'images/IMG-20241227-WA0202.jpg','images/IMG-20241227-WA0203.jpg','images/IMG-20241227-WA0204.jpg',
+          'images/IMG-20241227-WA0205.jpg','images/IMG-20241227-WA0206.jpg','images/IMG-20241227-WA0207.jpg',
+          'images/IMG-20241227-WA0208.jpg','images/IMG-20241227-WA0209.jpg','images/IMG-20241227-WA0210.jpg',
+          'images/IMG-20241227-WA0211.jpg','images/IMG-20241227-WA0212.jpg','images/IMG-20241227-WA0213.jpg',
+          'images/IMG-20241227-WA0214.jpg','images/IMG-20241227-WA0215.jpg','images/IMG-20241227-WA0216.jpg',
+          'images/IMG-20241228-WA0001.jpg','images/IMG-20241228-WA0002.jpg','images/IMG-20241228-WA0003.jpg',
+          'images/IMG-20241228-WA0004.jpg','images/IMG-20241228-WA0005.jpg','images/IMG-20241228-WA0006.jpg',
+          'images/IMG-20241228-WA0007.jpg','images/IMG-20241228-WA0008.jpg','images/IMG-20241228-WA0009.jpg',
+          'images/IMG-20241228-WA0010.jpg','images/IMG-20241228-WA0011.jpg','images/IMG-20241228-WA0012.jpg',
+          'images/IMG-20241228-WA0013.jpg','images/IMG-20241228-WA0014.jpg','images/IMG-20241228-WA0015.jpg',
+          'images/IMG-20241228-WA0016.jpg','images/IMG-20241228-WA0017.jpg','images/IMG-20241228-WA0018.jpg',
+          'images/IMG-20241228-WA0019.jpg','images/IMG-20241228-WA0274.jpg',
+        ]
+      },
+      {
+        labelAr: 'قطر 🇶🇦',
+        labelEn: 'Qatar 🇶🇦',
+        images: [
+          "images/Qatar/IMG-20241227-WA0214.jpg","images/Qatar/IMG-20241227-WA0215.jpg","images/Qatar/IMG-20241227-WA0216.jpg",
+          "images/Qatar/IMG-20241228-WA0001.jpg","images/Qatar/IMG-20241228-WA0002.jpg","images/Qatar/IMG-20241228-WA0003.jpg",
+          "images/Qatar/IMG-20241228-WA0020.jpg","images/Qatar/IMG-20241228-WA0021.jpg","images/Qatar/IMG-20241228-WA0022.jpg",
+          "images/Qatar/IMG-20241228-WA0023.jpg","images/Qatar/IMG-20241228-WA0024.jpg","images/Qatar/IMG-20241228-WA0025.jpg",
+          "images/Qatar/IMG-20241228-WA0026.jpg","images/Qatar/IMG-20241228-WA0027.jpg","images/Qatar/IMG-20241228-WA0028.jpg",
+          "images/Qatar/IMG-20241228-WA0029.jpg","images/Qatar/IMG-20241228-WA0030.jpg","images/Qatar/IMG-20241228-WA0031.jpg",
+          "images/Qatar/IMG-20241228-WA0032.jpg","images/Qatar/IMG-20241228-WA0033.jpg","images/Qatar/IMG-20241228-WA0034.jpg",
+          "images/Qatar/IMG-20241228-WA0035.jpg","images/Qatar/IMG-20241228-WA0036.jpg","images/Qatar/IMG-20241228-WA0037.jpg",
+          "images/Qatar/IMG-20241228-WA0038.jpg","images/Qatar/IMG-20241228-WA0039.jpg","images/Qatar/IMG-20241228-WA0040.jpg",
+          "images/Qatar/IMG-20241228-WA0041.jpg","images/Qatar/IMG-20241228-WA0042.jpg","images/Qatar/IMG-20241228-WA0043.jpg",
+          "images/Qatar/IMG-20241228-WA0044.jpg","images/Qatar/IMG-20241228-WA0045.jpg","images/Qatar/IMG-20241228-WA0046.jpg",
+          "images/Qatar/IMG-20241228-WA0047.jpg","images/Qatar/IMG-20241228-WA0048.jpg","images/Qatar/IMG-20241228-WA0049.jpg",
+          "images/Qatar/IMG-20241228-WA0050.jpg","images/Qatar/IMG-20241228-WA0051.jpg","images/Qatar/IMG-20241228-WA0052.jpg",
+          "images/Qatar/IMG-20241228-WA0053.jpg","images/Qatar/IMG-20241228-WA0054.jpg","images/Qatar/IMG-20241228-WA0055.jpg",
+          "images/Qatar/IMG-20241228-WA0056.jpg","images/Qatar/IMG-20241228-WA0057.jpg","images/Qatar/IMG-20241228-WA0058.jpg",
+          "images/Qatar/IMG-20241228-WA0059.jpg","images/Qatar/IMG-20241228-WA0060.jpg","images/Qatar/IMG-20241228-WA0061.jpg",
+          "images/Qatar/IMG-20241228-WA0062.jpg","images/Qatar/IMG-20241228-WA0063.jpg","images/Qatar/IMG-20241228-WA0064.jpg",
+          "images/Qatar/IMG-20241228-WA0065.jpg","images/Qatar/IMG-20241228-WA0066.jpg","images/Qatar/IMG-20241228-WA0067.jpg",
+          "images/Qatar/IMG-20241228-WA0068.jpg","images/Qatar/IMG-20241228-WA0069.jpg","images/Qatar/IMG-20241228-WA0070.jpg",
+          "images/Qatar/IMG-20241228-WA0071.jpg","images/Qatar/IMG-20241228-WA0072.jpg","images/Qatar/IMG-20241228-WA0073.jpg",
+          "images/Qatar/IMG-20241228-WA0074.jpg","images/Qatar/IMG-20241228-WA0075.jpg","images/Qatar/IMG-20241228-WA0076.jpg",
+          "images/Qatar/IMG-20241228-WA0077.jpg","images/Qatar/IMG-20241228-WA0078.jpg","images/Qatar/IMG-20241228-WA0079.jpg",
+          "images/Qatar/IMG-20241228-WA0080.jpg","images/Qatar/IMG-20241228-WA0081.jpg","images/Qatar/IMG-20241228-WA0082.jpg",
+          "images/Qatar/IMG-20241228-WA0083.jpg","images/Qatar/IMG-20241228-WA0084.jpg","images/Qatar/IMG-20241228-WA0085.jpg",
+          "images/Qatar/IMG-20241228-WA0086.jpg","images/Qatar/IMG-20241228-WA0087.jpg","images/Qatar/IMG-20241228-WA0088.jpg",
+          "images/Qatar/IMG-20241228-WA0089.jpg","images/Qatar/IMG-20241228-WA0090.jpg","images/Qatar/IMG-20241228-WA0091.jpg",
+          "images/Qatar/IMG-20241228-WA0092.jpg","images/Qatar/IMG-20241228-WA0093.jpg","images/Qatar/IMG-20241228-WA0094.jpg",
+          "images/Qatar/IMG-20241228-WA0273.jpg",
+        ]
+      },
+      {
+        labelAr: 'المغرب 🇲🇦',
+        labelEn: 'AL Ma3\'rab 🇲🇦',
+        images: [
+          "images/AL Ma3'rab/IMG-20241228-WA0095.jpg","images/AL Ma3'rab/IMG-20241228-WA0096.jpg","images/AL Ma3'rab/IMG-20241228-WA0097.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0098.jpg","images/AL Ma3'rab/IMG-20241228-WA0099.jpg","images/AL Ma3'rab/IMG-20241228-WA0100.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0101.jpg","images/AL Ma3'rab/IMG-20241228-WA0102.jpg","images/AL Ma3'rab/IMG-20241228-WA0103.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0104.jpg","images/AL Ma3'rab/IMG-20241228-WA0105.jpg","images/AL Ma3'rab/IMG-20241228-WA0106.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0107.jpg","images/AL Ma3'rab/IMG-20241228-WA0108.jpg","images/AL Ma3'rab/IMG-20241228-WA0109.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0110.jpg","images/AL Ma3'rab/IMG-20241228-WA0111.jpg","images/AL Ma3'rab/IMG-20241228-WA0112.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0113.jpg","images/AL Ma3'rab/IMG-20241228-WA0114.jpg","images/AL Ma3'rab/IMG-20241228-WA0115.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0116.jpg","images/AL Ma3'rab/IMG-20241228-WA0117.jpg","images/AL Ma3'rab/IMG-20241228-WA0118.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0119.jpg","images/AL Ma3'rab/IMG-20241228-WA0120.jpg","images/AL Ma3'rab/IMG-20241228-WA0121.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0122.jpg","images/AL Ma3'rab/IMG-20241228-WA0123.jpg","images/AL Ma3'rab/IMG-20241228-WA0124.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0125.jpg","images/AL Ma3'rab/IMG-20241228-WA0126.jpg","images/AL Ma3'rab/IMG-20241228-WA0127.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0128.jpg","images/AL Ma3'rab/IMG-20241228-WA0129.jpg","images/AL Ma3'rab/IMG-20241228-WA0130.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0131.jpg","images/AL Ma3'rab/IMG-20241228-WA0132.jpg","images/AL Ma3'rab/IMG-20241228-WA0133.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0134.jpg","images/AL Ma3'rab/IMG-20241228-WA0135.jpg","images/AL Ma3'rab/IMG-20241228-WA0136.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0137.jpg","images/AL Ma3'rab/IMG-20241228-WA0138.jpg","images/AL Ma3'rab/IMG-20241228-WA0139.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0140.jpg","images/AL Ma3'rab/IMG-20241228-WA0141.jpg","images/AL Ma3'rab/IMG-20241228-WA0142.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0143.jpg","images/AL Ma3'rab/IMG-20241228-WA0144.jpg","images/AL Ma3'rab/IMG-20241228-WA0145.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0146.jpg","images/AL Ma3'rab/IMG-20241228-WA0147.jpg","images/AL Ma3'rab/IMG-20241228-WA0148.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0149.jpg","images/AL Ma3'rab/IMG-20241228-WA0150.jpg","images/AL Ma3'rab/IMG-20241228-WA0151.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0152.jpg","images/AL Ma3'rab/IMG-20241228-WA0153.jpg","images/AL Ma3'rab/IMG-20241228-WA0154.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0155.jpg","images/AL Ma3'rab/IMG-20241228-WA0156.jpg","images/AL Ma3'rab/IMG-20241228-WA0157.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0158.jpg","images/AL Ma3'rab/IMG-20241228-WA0159.jpg","images/AL Ma3'rab/IMG-20241228-WA0160.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0161.jpg","images/AL Ma3'rab/IMG-20241228-WA0162.jpg","images/AL Ma3'rab/IMG-20241228-WA0163.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0164.jpg","images/AL Ma3'rab/IMG-20241228-WA0165.jpg","images/AL Ma3'rab/IMG-20241228-WA0166.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0167.jpg","images/AL Ma3'rab/IMG-20241228-WA0168.jpg","images/AL Ma3'rab/IMG-20241228-WA0169.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0170.jpg","images/AL Ma3'rab/IMG-20241228-WA0171.jpg","images/AL Ma3'rab/IMG-20241228-WA0172.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0173.jpg","images/AL Ma3'rab/IMG-20241228-WA0174.jpg","images/AL Ma3'rab/IMG-20241228-WA0175.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0176.jpg","images/AL Ma3'rab/IMG-20241228-WA0177.jpg","images/AL Ma3'rab/IMG-20241228-WA0178.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0179.jpg","images/AL Ma3'rab/IMG-20241228-WA0180.jpg","images/AL Ma3'rab/IMG-20241228-WA0181.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0182.jpg","images/AL Ma3'rab/IMG-20241228-WA0183.jpg","images/AL Ma3'rab/IMG-20241228-WA0184.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0185.jpg","images/AL Ma3'rab/IMG-20241228-WA0186.jpg","images/AL Ma3'rab/IMG-20241228-WA0187.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0188.jpg","images/AL Ma3'rab/IMG-20241228-WA0189.jpg","images/AL Ma3'rab/IMG-20241228-WA0190.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0191.jpg","images/AL Ma3'rab/IMG-20241228-WA0192.jpg","images/AL Ma3'rab/IMG-20241228-WA0193.jpg",
+          "images/AL Ma3'rab/IMG-20241228-WA0272.jpg",
+        ]
+      }
+    ];
+
+    // ─── Build gallery with tabs ──────────────────────
+    let currentAlbum = 0;
+    const isEn = () => document.body.classList.contains('en');
+
+    function buildGalleryTabs() {
+      const gallerySection = document.getElementById('gallery');
+      const grid = document.getElementById('galleryGrid');
+
+      // Create tab bar if not exists
+      if (!document.getElementById('albumTabs')) {
+        const tabBar = document.createElement('div');
+        tabBar.id = 'albumTabs';
+        tabBar.style.cssText = 'display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:32px;';
+        albums.forEach((album, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'album-tab' + (idx === 0 ? ' active' : '');
+          btn.dataset.idx = idx;
+          btn.textContent = isEn() ? album.labelEn : album.labelAr;
+          btn.style.cssText = `
+            border: 2px solid ${idx===0?'var(--blue-bright)':'rgba(30,144,255,0.3)'};
+            background: ${idx===0?'rgba(30,144,255,0.2)':'transparent'};
+            color: white; font-family: inherit; font-size: 14px; font-weight: 700;
+            padding: 10px 22px; border-radius: 30px; cursor: pointer;
+            transition: all 0.3s;
+          `;
+          btn.addEventListener('click', () => switchAlbum(idx));
+          tabBar.appendChild(btn);
+        });
+        grid.before(tabBar);
+      }
+
+      renderAlbum(currentAlbum);
+    }
+
+    function switchAlbum(idx) {
+      currentAlbum = idx;
+      document.querySelectorAll('.album-tab').forEach((btn, i) => {
+        const active = i === idx;
+        btn.style.borderColor   = active ? 'var(--blue-bright)' : 'rgba(30,144,255,0.3)';
+        btn.style.background    = active ? 'rgba(30,144,255,0.2)' : 'transparent';
+      });
+      renderAlbum(idx);
+    }
+
+    function renderAlbum(idx) {
+      const grid = document.getElementById('galleryGrid');
+      const album = albums[idx];
+      grid.innerHTML = '';
+
+      // Show first 12; load more on click
+      let shown = 12;
+
+      function renderBatch(images, fromIdx, toIdx) {
+        for (let i = fromIdx; i < Math.min(toIdx, images.length); i++) {
+          const src = images[i];
+          const item = document.createElement('div');
+          item.className = 'gallery-item';
+          item.setAttribute('data-aos', 'fade-up');
+          item.setAttribute('data-aos-delay', ((i % 3) * 80).toString());
+          item.innerHTML = `
+            <img src="${src}" alt="Belal Al Masri" loading="lazy" style="cursor:pointer;">
+            <div class="gallery-overlay"><i class="fas fa-expand" style="color:white;font-size:22px;"></i></div>
+          `;
+          item.querySelector('img').addEventListener('click', () => openLightbox(src, album.images, i));
+          grid.appendChild(item);
+        }
+        AOS.refresh();
+      }
+
+      renderBatch(album.images, 0, shown);
+
+      // Load more button
+      if (album.images.length > shown) {
+        const loadMore = document.createElement('button');
+        loadMore.id = 'loadMoreBtn';
+        loadMore.style.cssText = `
+          display:block; margin:32px auto 0; padding:12px 36px;
+          background: rgba(30,144,255,0.15); border:2px solid rgba(30,144,255,0.4);
+          color:white; font-family:inherit; font-size:14px; font-weight:700;
+          border-radius:30px; cursor:pointer; transition:all 0.3s;
+        `;
+        loadMore.innerHTML = isEn()
+          ? `<i class="fas fa-images"></i> Load More (${album.images.length - shown} remaining)`
+          : `<i class="fas fa-images"></i> تحميل المزيد (${album.images.length - shown} صورة)`;
+        loadMore.addEventListener('click', () => {
+          renderBatch(album.images, shown, shown + 12);
+          shown = Math.min(shown + 12, album.images.length);
+          if (shown >= album.images.length) loadMore.remove();
+          else loadMore.innerHTML = isEn()
+            ? `<i class="fas fa-images"></i> Load More (${album.images.length - shown} remaining)`
+            : `<i class="fas fa-images"></i> تحميل المزيد (${album.images.length - shown} صورة)`;
+        });
+        loadMore.addEventListener('mouseover', () => { loadMore.style.background='rgba(30,144,255,0.3)'; loadMore.style.borderColor='var(--blue-bright)'; });
+        loadMore.addEventListener('mouseout',  () => { loadMore.style.background='rgba(30,144,255,0.15)'; loadMore.style.borderColor='rgba(30,144,255,0.4)'; });
+        grid.after(loadMore);
+      }
+    }
+
+    buildGalleryTabs();
+
+    // Update tab labels when language switches
+    const origSetLang = setLang;
+    // patch tab labels on lang switch
+    document.querySelectorAll('#btn-ar,#btn-en').forEach(b => {
+      b.addEventListener('click', () => {
+        setTimeout(() => {
+          document.querySelectorAll('.album-tab').forEach((btn, i) => {
+            btn.textContent = isEn() ? albums[i].labelEn : albums[i].labelAr;
+          });
+        }, 50);
+      });
+    });
+
+    // ─── Enhanced Lightbox with prev/next ────────────
+    let _lbImages = [];
+    let _lbIndex  = 0;
+
+    function openLightbox(src, images, idx) {
+      _lbImages = images || [src];
+      _lbIndex  = idx !== undefined ? idx : 0;
+      _showLb();
+    }
+
+    function _showLb() {
+      document.getElementById('lb-img').src = _lbImages[_lbIndex];
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // counter
+      let ctr = document.getElementById('lb-counter');
+      if (!ctr) {
+        ctr = document.createElement('div');
+        ctr.id = 'lb-counter';
+        ctr.style.cssText = 'position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.7);font-size:14px;font-weight:600;';
+        document.getElementById('lightbox').appendChild(ctr);
+      }
+      ctr.textContent = `${_lbIndex + 1} / ${_lbImages.length}`;
+
+      // arrows
+      ['lb-prev','lb-next'].forEach(id => { const el = document.getElementById(id); if(el) el.remove(); });
+      if (_lbImages.length > 1) {
+        const prev = document.createElement('button');
+        prev.id = 'lb-prev';
+        prev.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        prev.style.cssText = 'position:absolute;top:50%;right:30px;transform:translateY(-50%);width:48px;height:48px;background:rgba(255,255,255,0.1);border:none;border-radius:50%;color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+        prev.onclick = (e) => { e.stopPropagation(); _lbIndex = (_lbIndex - 1 + _lbImages.length) % _lbImages.length; _showLb(); };
+        const next = document.createElement('button');
+        next.id = 'lb-next';
+        next.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        next.style.cssText = 'position:absolute;top:50%;left:30px;transform:translateY(-50%);width:48px;height:48px;background:rgba(255,255,255,0.1);border:none;border-radius:50%;color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+        next.onclick = (e) => { e.stopPropagation(); _lbIndex = (_lbIndex + 1) % _lbImages.length; _showLb(); };
+        document.getElementById('lightbox').appendChild(prev);
+        document.getElementById('lightbox').appendChild(next);
+      }
+    }
+
+    // keyboard nav
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'Escape')      closeLightbox();
+      if (e.key === 'ArrowLeft')   { _lbIndex = (_lbIndex + 1) % _lbImages.length; _showLb(); }
+      if (e.key === 'ArrowRight')  { _lbIndex = (_lbIndex - 1 + _lbImages.length) % _lbImages.length; _showLb(); }
+    });
+
+    // ─── Smooth scroll fix for RTL ──────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
